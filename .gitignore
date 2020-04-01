@@ -1,0 +1,8 @@
+
+photo-app-mobile/.classpath
+*.jar
+photo-app-mobile/.mvn/
+photo-app-mobile/.settings/
+
+
+photo-app-mobile/HELP.md
