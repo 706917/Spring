@@ -1,3 +1,9 @@
+/*
+ * A Class to provide User Sign Up support
+ */
+
+
+
 package alex.lab.photo.app.ui.model.request;
 
 public class UserDetailsRequestBody {
