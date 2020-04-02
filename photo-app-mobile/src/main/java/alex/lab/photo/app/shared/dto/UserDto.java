@@ -17,7 +17,7 @@ public class UserDto implements Serializable {
 	private String encryptedPassword; // to Store in Database
 
 	private String emailVerificationToken;
-	private Boolean emeailVerificationStatus;
+	private Boolean emeailVerificationStatus = false; // set the default value
 
 	public long getId() {
 		return id;
