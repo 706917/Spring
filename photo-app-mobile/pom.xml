@@ -32,8 +32,21 @@
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId> 
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/lib/jjwt-0.9.0.jar</systemPath>
+		</dependency> 		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
