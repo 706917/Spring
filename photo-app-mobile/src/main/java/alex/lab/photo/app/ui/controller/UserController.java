@@ -16,7 +16,7 @@ import alex.lab.photo.app.ui.model.responce.UserRest;
 import alex.lab.photo.app.ui.service.UserServise;
 
 @RestController
-@RequestMapping(path="/users") // http://localhost:8080/users
+@RequestMapping("/users") // http://localhost:8080/users
 
 public class UserController {
 	
