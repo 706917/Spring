@@ -6,3 +6,7 @@ photo-app-mobile/.settings/
 
 
 photo-app-mobile/HELP.md
+photo-app-mobile/src/main/resources/application.properties
+photo-app-mobile/target/
+*.properties
+*.properties
