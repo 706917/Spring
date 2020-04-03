@@ -11,3 +11,4 @@ photo-app-mobile/target/
 *.properties
 *.properties
 photo-app-mobile/target/classes/application.properties
+photo-app-mobile/src/main/resources/application.properties
