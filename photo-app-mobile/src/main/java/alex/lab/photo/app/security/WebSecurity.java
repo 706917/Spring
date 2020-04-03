@@ -32,7 +32,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests() // Allows restricting access based upon the HttpServletRequest using 
 		.antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll() // Allows any POST requests to "/users" path for all users
-		.anyRequest().authenticated(); // Any other requests should be authenticated
+		.anyRequest().authenticated() // Any other requests should be authenticated
+		.and().addFilter(new AuthenticationFilter(authenticationManager())); //adds an instance of our AuthenticationFIlter class as a custom filter
 	}
 
 }

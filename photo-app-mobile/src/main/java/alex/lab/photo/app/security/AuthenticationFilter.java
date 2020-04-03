@@ -2,6 +2,7 @@ package alex.lab.photo.app.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -12,11 +13,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import alex.lab.photo.app.ui.model.request.UserLogInRequestModel;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	
@@ -50,6 +54,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 			throw new RuntimeException(e);
 		}
 	}
+	
+	// If the previous method succeeds, this method is called
+	// Produces a JWT for response header
 
 	@Override
 	protected void successfulAuthentication(
@@ -59,15 +66,16 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 			Authentication authResult) 
 			throws IOException, ServletException {
 		
+		String userName = ((User) authResult.getPrincipal()).getUsername();
 		
+		String token = Jwts.builder()
+							.setSubject(userName)
+							.setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
+							.signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
+							.compact(); //Actually builds the JWT and serializes it to a compact, URL-safe string according to the JWT Compact Serialization rules.
 		
-
-	}
-	
-	
-	
-	
-	
-	  
+		response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+		
+	}	  
 
 }

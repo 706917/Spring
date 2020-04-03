@@ -1,4 +1,4 @@
-package alex.lab.photo.app.entity;
+package alex.lab.photo.app.io.entity;
 
 import java.io.Serializable;
 

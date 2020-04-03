@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import alex.lab.photo.app.UserRepository;
-import alex.lab.photo.app.entity.UserEntity;
+import alex.lab.photo.app.io.entity.UserEntity;
+import alex.lab.photo.app.io.repositories.UserRepository;
 import alex.lab.photo.app.shared.Utils;
 import alex.lab.photo.app.shared.dto.UserDto;
 import alex.lab.photo.app.ui.service.UserServise;
