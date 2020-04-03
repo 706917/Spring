@@ -7,15 +7,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import alex.lab.photo.app.ui.service.UserServise;
+import alex.lab.photo.app.ui.service.UserService;
 
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 	
-	private final UserServise userDetailsService;
+	private final UserService userDetailsService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	public WebSecurity(UserServise userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	public WebSecurity(UserService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		super();
 		this.userDetailsService = userDetailsService;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;

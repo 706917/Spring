@@ -4,8 +4,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import alex.lab.photo.app.shared.dto.UserDto;
 
-public interface UserServise  extends UserDetailsService{
+public interface UserService  extends UserDetailsService{
 	
 	UserDto createUser(UserDto user);
+	
+	UserDto getUser(String email);
 
 }

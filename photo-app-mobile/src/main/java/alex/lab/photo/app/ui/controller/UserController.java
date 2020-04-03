@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import alex.lab.photo.app.shared.dto.UserDto;
 import alex.lab.photo.app.ui.model.request.UserDetailsRequestBody;
 import alex.lab.photo.app.ui.model.responce.UserRest;
-import alex.lab.photo.app.ui.service.UserServise;
+import alex.lab.photo.app.ui.service.UserService;
 
 @RestController
 @RequestMapping("/users") // http://localhost:8080/users
@@ -21,7 +21,7 @@ import alex.lab.photo.app.ui.service.UserServise;
 public class UserController {
 	
 	@Autowired
-	UserServise userService;
+	UserService userService;
 	
 	@GetMapping
 	public String getUser() {

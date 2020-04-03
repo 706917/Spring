@@ -18,7 +18,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import alex.lab.photo.app.SpringApplicationContext;
+import alex.lab.photo.app.shared.dto.UserDto;
 import alex.lab.photo.app.ui.model.request.UserLogInRequestModel;
+import alex.lab.photo.app.ui.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -74,7 +77,15 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 							.signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
 							.compact(); //Actually builds the JWT and serializes it to a compact, URL-safe string according to the JWT Compact Serialization rules.
 		
+		// Inject instance of UserServiceIml class via Spring Context
+		UserService userService = (UserService) SpringApplicationContext.getBean("userServiceIml");
+		// Get the UserDto object via userService, extracting data from db
+		UserDto userDto = userService.getUser(userName);
+		
+		// Assign JWT into response header
 		response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+		// Assign UserId into response header
+		response.addHeader("UserId", userDto.getUserId());
 		
 	}	  
 

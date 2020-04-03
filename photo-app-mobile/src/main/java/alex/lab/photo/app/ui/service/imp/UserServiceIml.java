@@ -14,10 +14,10 @@ import alex.lab.photo.app.io.entity.UserEntity;
 import alex.lab.photo.app.io.repositories.UserRepository;
 import alex.lab.photo.app.shared.Utils;
 import alex.lab.photo.app.shared.dto.UserDto;
-import alex.lab.photo.app.ui.service.UserServise;
+import alex.lab.photo.app.ui.service.UserService;
 
 @Service
-public class UserServiceIml implements UserServise{
+public class UserServiceIml implements UserService{
 	
 	@Autowired
 	UserRepository userRepository;
@@ -53,6 +53,19 @@ public class UserServiceIml implements UserServise{
 		BeanUtils.copyProperties(storeduserDetails, returnValue);
 			
 		return returnValue;
+	}
+	
+	@Override
+	public UserDto getUser(String email) {
+		
+		UserEntity userEntity = userRepository.findByEmail(email);
+		if(userEntity == null) throw new UsernameNotFoundException(email);		
+		
+		UserDto returnValue = new UserDto();		
+		BeanUtils.copyProperties(userEntity, returnValue);
+		return returnValue;
+		
+		
 	}
 
 	@Override
