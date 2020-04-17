@@ -12,3 +12,7 @@ photo-app-mobile/target/
 *.properties
 photo-app-mobile/target/classes/application.properties
 photo-app-mobile/src/main/resources/application.properties
+book-library-app/mvnw
+book-library-app/mvnw.cmd
+book-library-app/.mvn/wrapper/maven-wrapper.jar
+book-library-app/.mvn/wrapper/MavenWrapperDownloader.java
