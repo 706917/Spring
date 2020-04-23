@@ -16,3 +16,7 @@ book-library-app/mvnw
 book-library-app/mvnw.cmd
 book-library-app/.mvn/wrapper/maven-wrapper.jar
 book-library-app/.mvn/wrapper/MavenWrapperDownloader.java
+book-library-app/src/main/resources/application.properties
+photo-app-mobile/.sts4-cache/classpath-data.json
+photo-app-mobile/src/main/resources/application.properties
+photo-app-mobile/target/classes/application.properties
