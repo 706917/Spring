@@ -6,17 +6,22 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import book.lib.entity.BookEntity;
 import book.lib.repositories.BooksRepository;
 import book.lib.services.BookService;
+import book.lib.shared.Utils;
 import book.lib.shared.dto.BookDto;
 
-
+@Service
 public class BookServiceImpl implements BookService{
 	
 	@Autowired
 	BooksRepository booksRepository;
+	
+	@Autowired
+	Utils utils;
 	
 	public List<BookDto> getAllBooks(){
 		List<BookDto> listBookDto= new ArrayList<BookDto>();
@@ -26,7 +31,7 @@ public class BookServiceImpl implements BookService{
 		Iterator<BookDto> dtoIterator = listBookDto.iterator();
 		
 		while(entityIterator.hasNext()) {
-			BeanUtils.copyProperties(entityIterator, dtoIterator);
+			BeanUtils.copyProperties(entityIterator.next(), dtoIterator.next());
 		}		
 		
 		return listBookDto;
@@ -35,15 +40,22 @@ public class BookServiceImpl implements BookService{
 	
 
 	@Override
-	public BookDto createBook(BookDto newBook) {
+	public BookDto createBook(BookDto book) {
 
-		if (booksRepository.findByIsbn(newBook.getIsbn()) != null) throw new RuntimeException("This book already exist in the library");
+		if (booksRepository.findByIsbn(book.getIsbn()) != null) throw new RuntimeException("This book already exist in the library");
 		
-		BookEntity book = new BookEntity();		
-		BeanUtils.copyProperties(newBook, book);
+		BookEntity bookEntity = new BookEntity();		
+		BeanUtils.copyProperties(book, bookEntity);
 		
-		BookDto returnValue = new BookDto();
-		BeanUtils.copyProperties(book, returnValue);
+		// Since we are not getting userId from the view in this process - we will generate it ourselves and assign its value to the entity attribute.
+		String publicBookId = utils.generateBookId();
+		bookEntity.setBookId(publicBookId);
+		//bookEntity.setAuthorName(book.getAuthorName()); - for checking purposes - check the methods names
+		
+		BookEntity createdBook = booksRepository.save(bookEntity);
+		
+		BookDto returnValue = new BookDto();		
+		BeanUtils.copyProperties(createdBook, returnValue);
 		
 		return returnValue;
 		}
@@ -52,9 +64,9 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public BookDto getBookById(String bookId) {
 		
-		if(booksRepository.findById(bookId) == null) throw new RuntimeException("Book does not exist");
+		if(booksRepository.findByBookId(bookId) == null) throw new RuntimeException("Book does not exist");
 		
-		BookEntity book = booksRepository.findById(bookId);
+		BookEntity book = booksRepository.findByBookId(bookId);
 		BookDto returnValue = new BookDto();
 		BeanUtils.copyProperties(book, returnValue);	
 		
@@ -63,9 +75,9 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public BookDto getBookByName(String bookName) {
-		if(booksRepository.findByName(bookName) == null) throw new RuntimeException("Book does not exist");
+		if(booksRepository.findByBookName(bookName) == null) throw new RuntimeException("Book does not exist");
 		
-		BookEntity book = booksRepository.findByName(bookName);
+		BookEntity book = booksRepository.findByBookName(bookName);
 		BookDto returnValue = new BookDto();
 		BeanUtils.copyProperties(book, returnValue);	
 		
@@ -74,9 +86,9 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public BookDto getBookByAuthor(String authorName) {
-		if(booksRepository.findByAuthor(authorName) == null) throw new RuntimeException("Book does not exist");
+		if(booksRepository.findByAuthorName(authorName) == null) throw new RuntimeException("Book does not exist");
 		
-		BookEntity book = booksRepository.findByAuthor(authorName);
+		BookEntity book = booksRepository.findByAuthorName(authorName);
 		BookDto returnValue = new BookDto();
 		BeanUtils.copyProperties(book, returnValue);	
 		
