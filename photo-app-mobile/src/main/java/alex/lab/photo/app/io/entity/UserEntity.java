@@ -36,6 +36,12 @@ public class UserEntity implements Serializable {
 
 	@Column(nullable = false)
 	private boolean emailVerificationStatus = false; // set the default value
+	
+	
+	
+	
+	
+	
 
 	public Long getId() {
 		return id;
