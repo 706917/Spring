@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import book.lib.services.impl.BookServiceImpl;
+import book.lib.services.BookService;
 import book.lib.shared.dto.BookDto;
 import book.lib.ui.model.Responce.BookResponceModel;
 import book.lib.ui.model.request.BookRequestModel;
@@ -26,18 +26,18 @@ import book.lib.ui.model.request.BookRequestModel;
 public class BooksController {
 	
 	@Autowired
-	BookServiceImpl bookServiceimpl;
+	BookService bookService;
 	
 	@GetMapping
 	public List<BookResponceModel> getBooks() {
 		List<BookResponceModel> listResponceModels = new ArrayList<>();
-		List<BookDto> listDto = bookServiceimpl.getAllBooks();	
+		List<BookDto> listDto = bookService.getAllBooks();	
 		
 		Iterator<BookResponceModel> responsIterator = listResponceModels.iterator();
 		Iterator<BookDto> dtoIterator = listDto.iterator();
 		
 		while(dtoIterator.hasNext()) {
-			BeanUtils.copyProperties(dtoIterator, responsIterator);
+			BeanUtils.copyProperties(dtoIterator.next(), responsIterator.next());
 		}		
 		
 		return 	listResponceModels;
@@ -47,12 +47,16 @@ public class BooksController {
 	
 	@PostMapping()
 	public BookResponceModel createBook(@Valid @RequestBody BookRequestModel bookDetails){
-		BookDto bookDto = new BookDto();
-		BeanUtils.copyProperties(bookDetails, bookDto);
-		
-		BookDto createdBook = bookServiceimpl.createBook(bookDto);
 		
 		BookResponceModel returnValue = new BookResponceModel();
+		
+		BookDto bookDto = new BookDto();
+		
+		BeanUtils.copyProperties(bookDetails, bookDto);
+		
+		BookDto createdBook = bookService.createBook(bookDto);
+		
+		
 		BeanUtils.copyProperties(createdBook, returnValue);		
 		
 		return returnValue;
