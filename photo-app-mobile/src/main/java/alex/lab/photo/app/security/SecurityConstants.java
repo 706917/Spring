@@ -1,4 +1,4 @@
-package alex.lab.photo.app.security;
+ package alex.lab.photo.app.security;
 
 public class SecurityConstants {
 	

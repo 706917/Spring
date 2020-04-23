@@ -48,7 +48,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 			
 			// Construct authentication token out from parameters of the object created and try to authenticate via manager (compare with the records we have in DB)
 			return authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(credentials.getEmail(), credentials.getPassword(), new ArrayList())
+					new UsernamePasswordAuthenticationToken(credentials.getEmail(), 
+															credentials.getPassword(), 
+															new ArrayList<>())
 					);
 					
 		}
@@ -76,6 +78,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 							.setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
 							.signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
 							.compact(); //Actually builds the JWT and serializes it to a compact, URL-safe string according to the JWT Compact Serialization rules.
+		
+		
 		
 		// Inject instance of UserServiceIml class via Spring Context
 		UserService userService = (UserService) SpringApplicationContext.getBean("userServiceIml");

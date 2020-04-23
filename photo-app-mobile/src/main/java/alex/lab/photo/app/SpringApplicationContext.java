@@ -1,4 +1,4 @@
-   package alex.lab.photo.app;
+package alex.lab.photo.app;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
