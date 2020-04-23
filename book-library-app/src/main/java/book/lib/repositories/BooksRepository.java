@@ -10,9 +10,9 @@ import book.lib.entity.BookEntity;
 public interface BooksRepository extends JpaRepository<BookEntity, Long>{
 	
 	BookEntity findByIsbn(String isbn);
-	BookEntity findById(String bookId);
-	BookEntity findByName(String bookName);
-	BookEntity findByAuthor(String authorName);
+	BookEntity findByBookId(String bookId);
+	BookEntity findByBookName(String bookName);
+	BookEntity findByAuthorName(String authorName);
 	
 	
 
