@@ -1,9 +1,13 @@
 package book.lib.services;
 
+import java.util.List;
+
 import book.lib.shared.dto.BookDto;
 
 
 public interface BookService {
+	
+	List <BookDto> getAllBooks();
 	
 	BookDto createBook(BookDto newBook);
 	
