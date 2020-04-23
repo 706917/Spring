@@ -46,27 +46,27 @@ public class BookEntity implements Serializable{
 	}
 
 
-	public String getBook_id() {
+	public String getBookId() {
 		return bookId;
 	}
 
-	public void setBook_id(String book_id) {
+	public void setBookId(String book_id) {
 		this.bookId = book_id;
 	}
 
-	public String getBook_name() {
+	public String getBookName() {
 		return bookName;
 	}
 
-	public void setBook_name(String book_name) {
+	public void setBookName(String book_name) {
 		this.bookName = book_name;
 	}
 
-	public String getAuthor_name() {
+	public String getAuthorName() {
 		return authorName;
 	}
 
-	public void setAuthor_name(String author_name) {
+	public void setAuthorName(String author_name) {
 		this.authorName = author_name;
 	}
 
