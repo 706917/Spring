@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import book.lib.services.impl.BookServiceImpl;
 import book.lib.shared.dto.BookDto;
 import book.lib.ui.model.Responce.BookResponceModel;
+import book.lib.ui.model.request.BookRequestModel;
 
 @RestController
 @RequestMapping("/books")
@@ -36,15 +38,24 @@ public class BooksController {
 		
 		while(dtoIterator.hasNext()) {
 			BeanUtils.copyProperties(dtoIterator, responsIterator);
-		}
-		
+		}		
 		
 		return 	listResponceModels;
 	}
 	
-	public ResponseEntity<BookResponceModel> createBook(@Valid @RequestBody BookDetailsRequestModel bookDetails){
+	
+	
+	@PostMapping()
+	public BookResponceModel createBook(@Valid @RequestBody BookRequestModel bookDetails){
+		BookDto bookDto = new BookDto();
+		BeanUtils.copyProperties(bookDetails, bookDto);
 		
-		return null;
+		BookDto createdBook = bookServiceimpl.createBook(bookDto);
+		
+		BookResponceModel returnValue = new BookResponceModel();
+		BeanUtils.copyProperties(createdBook, returnValue);		
+		
+		return returnValue;
 	}
 	
 	
