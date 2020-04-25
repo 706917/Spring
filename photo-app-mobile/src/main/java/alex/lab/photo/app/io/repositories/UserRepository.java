@@ -9,6 +9,8 @@ import alex.lab.photo.app.io.entity.UserEntity;
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
 	
 	UserEntity findByEmail(String email);
+
+	UserEntity findByUserId(String id);
 	
 
 }
