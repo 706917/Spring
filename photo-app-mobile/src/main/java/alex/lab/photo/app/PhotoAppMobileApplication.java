@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import alex.lab.photo.app.security.AppProperties;
+
 @SpringBootApplication
 public class PhotoAppMobileApplication {
 
@@ -22,5 +24,9 @@ public class PhotoAppMobileApplication {
 		return new SpringApplicationContext();
 	}
 	
+//	@Bean(name="appProperties")
+//	public AppProperties getAppProperties() {
+//		return new AppProperties();
+//	}
 
 }
