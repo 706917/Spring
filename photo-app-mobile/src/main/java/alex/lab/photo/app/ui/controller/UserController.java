@@ -2,8 +2,10 @@ package alex.lab.photo.app.ui.controller;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,12 +25,21 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping
-	public String getUser() {
-		return "get user was called";
+	@GetMapping(path="/{id}", 
+			produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // allow to produce information in either XML and JSON formats
+	public UserRest getUser(@PathVariable String id) {
+		
+		UserRest returnValue = new UserRest();
+		
+		UserDto userDto = userService.getUserByUserId(id);
+		
+		BeanUtils.copyProperties(userDto, returnValue);
+		
+		return returnValue;
 	}
 	
-	@PostMapping
+	@PostMapping(produces =  {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
+			consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // allow to consume information in either XML and JSON formats
 	public UserRest createUser(
 			@RequestBody UserDetailsRequestBody userDetails
 			) {
