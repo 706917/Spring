@@ -5,6 +5,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import alex.lab.photo.app.ui.service.UserService;
@@ -33,8 +34,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().authorizeRequests() // Allows restricting access based upon the HttpServletRequest using 
 		.antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll() // Allows any POST requests to "/users" path for all users
 		.anyRequest().authenticated() // Any other requests should be authenticated
-		.and().addFilter(getAuthenticationFilter()); //adds an instance of our AuthenticationFIlter class as a custom filter with the method which provides special url
+		.and().addFilter(getAuthenticationFilter())//adds an instance of our AuthenticationFIlter class as a custom filter with the method which provides special url
+		.addFilter(new AuthorizationFilter(authenticationManager())) // authorize authenticated user to act
+		.sessionManagement()
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS); // make the connection stateless to prevent authorization headers from being cashed
 	}
+	
+	
+	
 	
 	// Specifies the URL to login 
 	public AuthenticationFilter getAuthenticationFilter() throws Exception{
