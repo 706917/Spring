@@ -1,4 +1,4 @@
-package alex.lab.photo.app.ui.service.imp;
+package alex.lab.photo.app.service.imp;
 
 import java.util.ArrayList;
 
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 import alex.lab.photo.app.io.entity.UserEntity;
 import alex.lab.photo.app.io.repositories.UserRepository;
+import alex.lab.photo.app.service.UserService;
 import alex.lab.photo.app.shared.Utils;
 import alex.lab.photo.app.shared.dto.UserDto;
-import alex.lab.photo.app.ui.service.UserService;
 
 @Service
 public class UserServiceIml implements UserService {

@@ -1,4 +1,4 @@
-package alex.lab.photo.app.ui.service;
+package alex.lab.photo.app.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 

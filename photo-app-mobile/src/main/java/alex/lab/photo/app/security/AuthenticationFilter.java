@@ -19,9 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import alex.lab.photo.app.SpringApplicationContext;
+import alex.lab.photo.app.service.UserService;
 import alex.lab.photo.app.shared.dto.UserDto;
 import alex.lab.photo.app.ui.model.request.UserLogInRequestModel;
-import alex.lab.photo.app.ui.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 

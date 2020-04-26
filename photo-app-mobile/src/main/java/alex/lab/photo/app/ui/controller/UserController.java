@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import alex.lab.photo.app.service.UserService;
 import alex.lab.photo.app.shared.dto.UserDto;
 import alex.lab.photo.app.ui.model.request.UserDetailsRequestBody;
 import alex.lab.photo.app.ui.model.responce.UserRest;
-import alex.lab.photo.app.ui.service.UserService;
 
 @RestController
 @RequestMapping("/users") // http://localhost:8080/users
