@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import alex.lab.photo.app.exceptions.UserServiceException;
 import alex.lab.photo.app.service.UserService;
 import alex.lab.photo.app.shared.dto.UserDto;
 import alex.lab.photo.app.ui.model.request.UserDetailsRequestBody;
+import alex.lab.photo.app.ui.model.responce.ErrorMessages;
 import alex.lab.photo.app.ui.model.responce.UserRest;
 
 @RestController
@@ -42,7 +44,9 @@ public class UserController {
 			consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // allow to consume information in either XML and JSON formats
 	public UserRest createUser(
 			@RequestBody UserDetailsRequestBody userDetails
-			) {
+			) throws Exception {
+		
+		if (userDetails.getFirstName().isEmpty()) throw new UserServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
 		
 		UserRest returnValue = new UserRest(); // A class-instance to populate with data to return with Responce
 		
