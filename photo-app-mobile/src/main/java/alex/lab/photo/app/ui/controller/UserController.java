@@ -28,7 +28,7 @@ public class UserController {
 	UserService userService;
 	
 	@GetMapping(path="/{id}", 
-			produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // allow to produce information in either XML and JSON formats
+				produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // allow to produce information in either XML and JSON formats
 	public UserRest getUser(@PathVariable String id) {
 		
 		UserRest returnValue = new UserRest();
@@ -40,11 +40,9 @@ public class UserController {
 		return returnValue;
 	}
 	
-	@PostMapping(produces =  {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
-			consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // allow to consume information in either XML and JSON formats
-	public UserRest createUser(
-			@RequestBody UserDetailsRequestBody userDetails
-			) throws Exception {
+	@PostMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
+				 consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) // allow to consume information in either XML and JSON formats
+	public UserRest createUser(@RequestBody UserDetailsRequestBody userDetails) throws Exception {
 		
 		if (userDetails.getFirstName().isEmpty()) throw new UserServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
 		
@@ -61,9 +59,22 @@ public class UserController {
 		return returnValue;
 	}
 	
-	@PutMapping
-	public String updateUser() {
-		return "update was called";
+	@PutMapping(path="/{id}",
+				produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
+				consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}) 	
+	public UserRest updateUser(@PathVariable String id, @RequestBody UserDetailsRequestBody userDetails) {
+
+		UserRest returnValue = new UserRest(); 
+		
+		UserDto userDto = new UserDto(); 
+		
+		BeanUtils.copyProperties(userDetails, userDto); 
+		
+		UserDto updatedUser = userService.updateUser(id, userDto); 
+		
+		BeanUtils.copyProperties(updatedUser, returnValue);
+		
+		return returnValue;
 	}
 	
 	@DeleteMapping
