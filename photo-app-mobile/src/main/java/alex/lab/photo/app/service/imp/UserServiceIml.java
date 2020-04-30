@@ -1,10 +1,12 @@
 package alex.lab.photo.app.service.imp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.BeanDefinitionDsl.BeanSupplierContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +32,31 @@ public class UserServiceIml implements UserService {
 
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	
+	
+	@Override
+	public List<UserDto> getUsers(int page, int limit) {
+		
+		List<UserDto> returnValue = new ArrayList<UserDto>();
+		
+		if(page>0) page-=1;
+		
+		PageRequest pageabaleRequest = PageRequest.of(page, limit);		
+		Page<UserEntity> userPage = userRepository.findAll(pageabaleRequest);
+		
+		List<UserEntity> users = userPage.getContent();
+		
+		for(UserEntity user: users) {
+			UserDto userDto = new UserDto();
+			BeanUtils.copyProperties(user, userDto);
+			returnValue.add(userDto);
+		}
+		
+		return returnValue;
+	}
+	
+	
 
 	@Override
 	public UserDto createUser(UserDto user) {
@@ -108,6 +135,16 @@ public class UserServiceIml implements UserService {
 
 		return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
 	}
+	
+
+	@Override
+	public void deleteUser(String id) {
+		UserEntity userEntity = userRepository.findByUserId(id);
+		if(userEntity==null) throw new UsernameNotFoundException(id);
+		userRepository.delete(userEntity); 		
+	}
+
+	
 
 	
 
