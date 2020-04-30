@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import alex.lab.photo.app.ui.model.responce.ErrorMessage;
+import alex.lab.photo.app.ui.model.responce.ErrorMessageModel;
 
 @ControllerAdvice
 public class AppExceptionsHandler {
@@ -17,7 +17,7 @@ public class AppExceptionsHandler {
 	@ExceptionHandler(value = {UserServiceException.class})
 	public ResponseEntity<Object> handlerUserServiceException(UserServiceException ex, WebRequest request){
 		
-		ErrorMessage errorMessage = new ErrorMessage(new Date(), ex.getMessage());
+		ErrorMessageModel errorMessage = new ErrorMessageModel(new Date(), ex.getMessage());
 		
 		return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
 		
