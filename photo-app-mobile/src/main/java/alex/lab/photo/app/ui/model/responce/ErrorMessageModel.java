@@ -3,19 +3,19 @@ package alex.lab.photo.app.ui.model.responce;
 import java.util.Date;
 
 
-public class ErrorMessage {
+public class ErrorMessageModel {
 
 	private Date timeStamp;
 	private String message;
 
 	
-	public ErrorMessage() {}
+	public ErrorMessageModel() {}
 
 	/**
 	 * @param timeStamp
 	 * @param message
 	 */
-	public ErrorMessage(Date timeStamp, String message) {
+	public ErrorMessageModel(Date timeStamp, String message) {
 		this.timeStamp = timeStamp;
 		this.message = message;
 	}
