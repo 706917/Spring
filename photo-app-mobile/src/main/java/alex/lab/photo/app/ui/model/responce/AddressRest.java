@@ -1,7 +1,9 @@
 package alex.lab.photo.app.ui.model.responce;
 
+import org.springframework.hateoas.RepresentationModel;
 
-public class AddressRest {
+
+public class AddressRest extends RepresentationModel<AddressRest>{
 
 	private String addressId;
 	private String city;
