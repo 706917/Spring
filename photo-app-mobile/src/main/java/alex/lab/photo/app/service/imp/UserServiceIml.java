@@ -3,6 +3,7 @@ package alex.lab.photo.app.service.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import alex.lab.photo.app.io.entity.UserEntity;
 import alex.lab.photo.app.io.repositories.UserRepository;
 import alex.lab.photo.app.service.UserService;
 import alex.lab.photo.app.shared.Utils;
+import alex.lab.photo.app.shared.dto.AddressDto;
 import alex.lab.photo.app.shared.dto.UserDto;
 import alex.lab.photo.app.ui.model.responce.ErrorMessages;
 
@@ -48,8 +50,8 @@ public class UserServiceIml implements UserService {
 		List<UserEntity> users = userPage.getContent();
 		
 		for(UserEntity user: users) {
-			UserDto userDto = new UserDto();
-			BeanUtils.copyProperties(user, userDto);
+			UserDto userDto = new ModelMapper().map(user, UserDto.class);//new UserDto();
+			//BeanUtils.copyProperties(user, userDto);
 			returnValue.add(userDto);
 		}
 		
@@ -64,23 +66,32 @@ public class UserServiceIml implements UserService {
 		// Check if user with such email already exist
 		if (userRepository.findByEmail(user.getEmail()) != null)
 			throw new RuntimeException("Record already exist");
+		
+		for (int i = 0; i<user.getAddresses().size(); i++) {
+			AddressDto address = user.getAddresses().get(i);
+			address.setUserDetails(user);
+			address.setAddressId(utils.generateAddressId(15));
+			user.getAddresses().set(i, address);
+		}
 
-		UserEntity userEntity = new UserEntity();
-		BeanUtils.copyProperties(user, userEntity);
+		// UserEntity userEntity = new UserEntity();
+		// BeanUtils.copyProperties(user, userEntity);
+		ModelMapper modelMapper = new ModelMapper();
+		UserEntity userEntity = modelMapper.map(user, UserEntity.class);
 
 		// Generate public userId with the length = 30 characters
 		String publicUserId = utils.generateUserId(30);
 		userEntity.setUserId(publicUserId);
 
-		// Encrypt password provided by user - to store encrypted version in the
-		// DataBase
+		// Encrypt password provided by user - to store encrypted version in the DataBase
 		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
 		UserEntity storeduserDetails = userRepository.save(userEntity);
 
-		UserDto returnValue = new UserDto();
+		UserDto returnValue = modelMapper.map(storeduserDetails, UserDto.class);
 
-		BeanUtils.copyProperties(storeduserDetails, returnValue);
+		// BeanUtils.copyProperties(storeduserDetails, returnValue);
+		
 
 		return returnValue;
 	}
@@ -110,6 +121,7 @@ public class UserServiceIml implements UserService {
 		if (userEntity == null)
 			throw new UsernameNotFoundException(email);
 
+	//	UserDto returnValue = new ModelMapper().map(userEntity, UserDto.class); // this one is not working
 		UserDto returnValue = new UserDto();
 		BeanUtils.copyProperties(userEntity, returnValue);
 		return returnValue;
@@ -121,7 +133,9 @@ public class UserServiceIml implements UserService {
 		UserEntity userEntity = userRepository.findByUserId(id);
 		if (userEntity == null)
 			throw new UsernameNotFoundException(id);
-		BeanUtils.copyProperties(userEntity, returnValue);
+
+		//BeanUtils.copyProperties(userEntity, returnValue);
+		returnValue = new ModelMapper().map(userEntity, UserDto.class);
 		return returnValue;
 	}
 
