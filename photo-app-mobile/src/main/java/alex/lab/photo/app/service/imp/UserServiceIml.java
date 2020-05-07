@@ -65,7 +65,7 @@ public class UserServiceIml implements UserService {
 
 		// Check if user with such email already exist
 		if (userRepository.findByEmail(user.getEmail()) != null)
-			throw new RuntimeException("Record already exist");
+			throw new UserServiceException("Record already exist");
 		
 		for (int i = 0; i<user.getAddresses().size(); i++) {
 			AddressDto address = user.getAddresses().get(i);
