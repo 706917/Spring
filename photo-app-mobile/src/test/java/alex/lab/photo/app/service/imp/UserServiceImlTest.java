@@ -22,6 +22,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import alex.lab.photo.app.exceptions.UserServiceException;
 import alex.lab.photo.app.io.entity.AddressEntity;
 import alex.lab.photo.app.io.entity.UserEntity;
 import alex.lab.photo.app.io.repositories.UserRepository;
@@ -95,6 +96,26 @@ class UserServiceImlTest {
 		
 	}
 	
+	@Test
+	final void testCreateUser_CreateUserServiceException() {
+		
+		when(userRepository.findByEmail(anyString())).thenReturn(userEntity);
+		
+		// Stab userDto object preparation	
+		
+				UserDto userDto = new UserDto();
+				userDto.setAddresses(getAddressesDto());
+				userDto.setFirstName("Alex");
+				userDto.setLastName("Rom");
+				userDto.setPassword(fakePasword);
+				userDto.setEmail("test@test.com");
+		
+		assertThrows(UserServiceException.class,
+				()->{
+					userService.createUser(userDto);
+				});
+	}
+	
 	
 	@Test
 	final void testCreateUser() {
@@ -131,6 +152,7 @@ class UserServiceImlTest {
 		
 		// How many times these methods actually called
 		int generatedAddresses = storedUserDetails.getAddresses().size();
+		
 		verify(utils,times(generatedAddresses)).generateAddressId(15);
 		verify(bCryptPasswordEncoder, times(1)).encode(fakePasword);
 		verify(userRepository, times(1)).save(any(UserEntity.class));
