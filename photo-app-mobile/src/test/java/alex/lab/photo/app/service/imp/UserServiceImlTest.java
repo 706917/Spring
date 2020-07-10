@@ -25,6 +25,7 @@ import alex.lab.photo.app.exceptions.UserServiceException;
 import alex.lab.photo.app.io.entity.AddressEntity;
 import alex.lab.photo.app.io.entity.UserEntity;
 import alex.lab.photo.app.io.repositories.UserRepository;
+import alex.lab.photo.app.service.imp.UserServiceIml;
 import alex.lab.photo.app.shared.Utils;
 import alex.lab.photo.app.shared.dto.AddressDto;
 import alex.lab.photo.app.shared.dto.UserDto;
