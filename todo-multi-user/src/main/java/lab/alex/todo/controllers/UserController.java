@@ -33,16 +33,23 @@ public class UserController {
 	// **************** Controllers **************
 	
 	@GetMapping
-	public String getAllUsers(){
+	public List<UserResponceModel> getAllUsers(){
 		
-		return "Alex";
+		List<UserResponceModel> returnList = new ArrayList<>();
 		
-	}
+		userService.getAllUsers().forEach(el -> returnList.add(mapper.map(el, UserResponceModel.class)));
+		
+		return returnList;
+		
+	}	
+	
 	
 	@GetMapping("/{id}")
-	public String getUser(@PathVariable String id){
+	public UserResponceModel getUser(@PathVariable String id) throws Exception{
 		
-		return "Alex " + id;
+		UserResponceModel returnvalue = mapper.map(userService.getUserByUserId(id), UserResponceModel.class);
+		
+		return returnvalue;
 		
 	}
 	
@@ -59,8 +66,13 @@ public class UserController {
 	}
 	
 	@PutMapping("/{id}")
-	public String updateUser(@PathVariable String id) {
-		return "Updated";
+	public UserResponceModel updateUser(@PathVariable String id, @RequestBody UserDetailsRequestModel userDetailsRequestModel) throws Exception {
+		
+		UserDto updatedUser =  userService.updateUser(id, mapper.map(userDetailsRequestModel, UserDto.class));
+		
+		UserResponceModel returnValue = mapper.map(updatedUser, UserResponceModel.class);
+		
+		return returnValue;
 	}
 	
 	
