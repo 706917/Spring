@@ -22,3 +22,5 @@ photo-app-mobile/src/main/resources/application.properties
 photo-app-mobile/target/classes/application.properties
 photo-app-mobile/src/main/resources/application.properties
 book-library-app/src/main/resources/application.properties
+book-library-app/.mvn/wrapper/maven-wrapper.jar
+photo-app-mobile/target/test-classes/alex/lab/photo/app/PhotoAppMobileApplicationTests.class
