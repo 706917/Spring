@@ -10,7 +10,7 @@ public class UserResponceModel {
 
 	private String publicUserId;
 
-	private String userName;
+	private String name;
 
 	private String phone;
 
@@ -32,12 +32,12 @@ public class UserResponceModel {
 		this.publicUserId = publicUserId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String userName) {
+		this.name = userName;
 	}
 
 	public String getPhone() {
