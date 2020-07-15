@@ -13,10 +13,8 @@ public class TodoMultiUserApplication {
 	}
 	
 	@Bean
-	public ModelMapper mapper() {
-		ModelMapper mapper = null;
-		if (mapper == null) mapper = new ModelMapper();
-		return mapper;
+	public ModelMapper mapper() {		 
+		return new ModelMapper();
 	}
 
 }
