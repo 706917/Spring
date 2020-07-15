@@ -13,11 +13,13 @@ public class UserDetailsRequestModel {
 
 	private String password;
 
+	
+
+	// **************** Accessors **********************
+	
 	public String getName() {
 		return name;
 	}
-
-	// **************** Accessors **********************
 
 	public void setName(String name) {
 		this.name = name;
