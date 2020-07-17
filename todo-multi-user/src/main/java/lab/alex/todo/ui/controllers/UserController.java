@@ -1,4 +1,4 @@
-package lab.alex.todo.controllers;
+package lab.alex.todo.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lab.alex.todo.dto.UserDto;
-import lab.alex.todo.model.request.UserDetailsRequestModel;
-import lab.alex.todo.model.responce.UserResponceModel;
 import lab.alex.todo.services.UserService;
+import lab.alex.todo.ui.model.request.UserDetailsRequestModel;
+import lab.alex.todo.ui.model.responce.OperationStatusModel;
+import lab.alex.todo.ui.model.responce.ResponceOperationName;
+import lab.alex.todo.ui.model.responce.ResponceOperationStatus;
+import lab.alex.todo.ui.model.responce.UserResponceModel;
 
 @RestController
 @RequestMapping("/api/users")
@@ -77,8 +80,17 @@ public class UserController {
 	
 	
 	@DeleteMapping("/{id}")
-	public String deleteUser(@PathVariable String id) {
-		return "deleted";
+	public OperationStatusModel deleteUser(@PathVariable String id) throws Exception {
+		
+		userService.deleteUser(id);
+		
+		OperationStatusModel returnValue = new OperationStatusModel();
+		
+		returnValue.setOperationName(ResponceOperationName.DELETE.name());
+		returnValue.setOperationStatus(ResponceOperationStatus.SUCCESS.name());
+		
+		
+		return returnValue;
 	}
 
 }

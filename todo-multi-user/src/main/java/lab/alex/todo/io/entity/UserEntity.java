@@ -1,4 +1,4 @@
-package lab.alex.todo.entity;
+package lab.alex.todo.io.entity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -38,7 +38,7 @@ public class UserEntity implements Serializable {
 	@Column(nullable = false, length = 150)
 	private String userMoto;
 	
-	@Column (nullable = false, length = 50)
+	@Column (nullable = false, length = 150)
 	private String encryptedPassword;
 	
 	//*****************Association*******************

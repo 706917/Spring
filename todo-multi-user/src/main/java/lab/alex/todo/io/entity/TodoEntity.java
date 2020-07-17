@@ -1,4 +1,4 @@
-package lab.alex.todo.entity;
+package lab.alex.todo.io.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -34,7 +34,7 @@ public class TodoEntity implements Serializable {
 	private String textTodo;
 	
 	@Column (nullable = false, length = 30)
-	@JsonFormat(shape = Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss, timezone = UTC")
+	@JsonFormat(shape = Shape.STRING, pattern = "dd-MM HH:mm, timezone = UTC")
 	private Date dateTimeTodoCreated;
 	
 	@Column (nullable = false)

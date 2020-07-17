@@ -1,4 +1,4 @@
-package lab.alex.todo.model.responce;
+package lab.alex.todo.ui.model.responce;
 
 import java.util.List;
 
@@ -11,11 +11,8 @@ public class UserResponceModel {
 	private String publicUserId;
 
 	private String name;
-
 	private String phone;
-
 	private String email;
-
 	private String userMoto;
 	
 	private List<TodoResponceModel> usersTodos;

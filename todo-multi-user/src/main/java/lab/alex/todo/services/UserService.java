@@ -2,9 +2,11 @@ package lab.alex.todo.services;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import lab.alex.todo.dto.UserDto;
 
-public interface UserService {// extends UserDetailsService{
+public interface UserService extends UserDetailsService{
 	
 	UserDto createUser(UserDto userDto) throws Exception;
 	
@@ -14,5 +16,7 @@ public interface UserService {// extends UserDetailsService{
 	
 
 	UserDto updateUser(String id, UserDto userDto) throws Exception;
+
+	void deleteUser(String id) throws Exception;
 
 }

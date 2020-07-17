@@ -5,14 +5,18 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lab.alex.todo.dto.UserDto;
-import lab.alex.todo.entity.UserEntity;
-import lab.alex.todo.model.request.UserDetailsRequestModel;
-import lab.alex.todo.model.responce.UserResponceModel;
-import lab.alex.todo.repository.UserRepository;
+import lab.alex.todo.io.entity.UserEntity;
+import lab.alex.todo.io.repository.UserRepository;
 import lab.alex.todo.services.UserService;
+import lab.alex.todo.ui.model.request.UserDetailsRequestModel;
+import lab.alex.todo.ui.model.responce.UserResponceModel;
 import lab.alex.todo.utility.Utils;
 
 @Service
@@ -26,6 +30,8 @@ public class UserServiceImpl implements UserService {
 	Utils utils;
 	@Autowired
 	ModelMapper mapper;
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 
 	// **************** Methods ***************
 
@@ -41,7 +47,7 @@ public class UserServiceImpl implements UserService {
 		UserEntity newUser = mapper.map(userDto, UserEntity.class);
 
 		String publicUserId = utils.generatePublicUserId();
-		String encryptedPassword = "example";
+		String encryptedPassword = passwordEncoder.encode(userDto.getPassword());
 
 		newUser.setPublicUserId(publicUserId);
 		newUser.setEncryptedPassword(encryptedPassword);
@@ -100,6 +106,34 @@ public class UserServiceImpl implements UserService {
 		
 		
 		return newUserDetails;
+	}
+
+
+
+
+
+
+	@Override
+	public void deleteUser(String id) throws Exception {
+		UserEntity user = userRepository.findByPublicUserId(id);
+		if(user == null) throw new Exception("No such user");
+		userRepository.delete(user);
+		
+	}
+
+
+
+
+
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+		UserEntity userEntity = userRepository.findByEmail(email);
+		if(userEntity == null) throw new UsernameNotFoundException("No User such with the email " + email);
+		
+		
+		return new User (userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
 	}
 
 }

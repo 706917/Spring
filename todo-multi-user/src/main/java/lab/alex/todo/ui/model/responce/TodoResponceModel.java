@@ -1,4 +1,4 @@
-package lab.alex.todo.model.responce;
+package lab.alex.todo.ui.model.responce;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package lab.alex.todo.model.request;
+package lab.alex.todo.ui.model.request;
 
 
 public class UserDetailsRequestModel {
@@ -8,7 +8,6 @@ public class UserDetailsRequestModel {
 	private String name;
 	private String phone;
 	private String email;
-
 	private String userMoto;
 
 	private String password;

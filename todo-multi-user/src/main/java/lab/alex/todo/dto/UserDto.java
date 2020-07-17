@@ -3,8 +3,7 @@ package lab.alex.todo.dto;
 import java.io.Serializable;
 import java.util.List;
 
-
-import lab.alex.todo.entity.TodoEntity;
+import lab.alex.todo.io.entity.TodoEntity;
 
 public class UserDto implements Serializable {
 

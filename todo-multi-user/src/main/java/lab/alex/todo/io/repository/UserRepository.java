@@ -1,8 +1,8 @@
-package lab.alex.todo.repository;
+package lab.alex.todo.io.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import lab.alex.todo.entity.UserEntity;
+import lab.alex.todo.io.entity.UserEntity;
 
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
 	
