@@ -43,11 +43,23 @@ public class TodoEntity implements Serializable {
 	
 	//***************Association****************
 	@ManyToOne
-	@JoinColumn(name = "publicUserId")
-	private UserEntity userDetails;
+	@JoinColumn(name = "creator")
+	private UserEntity creatorDetails;
 	
 	
-	//*************Accessors*******************
+	@ManyToOne
+	@JoinColumn(name = "event")
+	private EventEntity eventDetails;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "group")
+	private GroupEntity todoGroupDetails;
+	
+	
+
+
+	//****************Accessors************************
 
 
 	public long getDatabaseTodoId() {
@@ -100,15 +112,37 @@ public class TodoEntity implements Serializable {
 	}
 
 
-	public UserEntity getUserDetails() {
-		return userDetails;
+	public UserEntity getCreatorDetails() {
+		return creatorDetails;
 	}
 
 
-	public void setUserDetails(UserEntity userDetails) {
-		this.userDetails = userDetails;
+	public void setCreatorDetails(UserEntity creatorDetails) {
+		this.creatorDetails = creatorDetails;
+	}
+
+
+	public EventEntity getEventDetails() {
+		return eventDetails;
+	}
+
+
+	public void setEventDetails(EventEntity eventDetails) {
+		this.eventDetails = eventDetails;
+	}
+
+
+	public GroupEntity getTodoGroupDetails() {
+		return todoGroupDetails;
+	}
+
+
+	public void setTodoGroupDetails(GroupEntity todoGroupDetails) {
+		this.todoGroupDetails = todoGroupDetails;
 	}
 	
+	
+
 	
 	
 	
