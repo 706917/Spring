@@ -43,17 +43,17 @@ public class TodoEntity implements Serializable {
 	
 	//***************Association****************
 	@ManyToOne
-	@JoinColumn(name = "creator")
+	@JoinColumn(name = "public_user_id")
 	private UserEntity creatorDetails;
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "event")
+	@JoinColumn(name = "public_event_id")
 	private EventEntity eventDetails;
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "group")
+	@JoinColumn(name = "public_group_id")
 	private GroupEntity todoGroupDetails;
 	
 	
