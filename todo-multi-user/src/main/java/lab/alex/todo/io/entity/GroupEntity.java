@@ -51,13 +51,13 @@ public class GroupEntity implements Serializable{
 	//---------------
 	
 	@ManyToOne
-	@JoinColumn(name = "admin")
+	@JoinColumn(name = "public_user_id")
 	private UserEntity adminDetails;
 	
 	//---------------
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "setGroups")
-	private Set<UserEntity> members = new HashSet<>();
+	private Set<UserEntity> setUsers = new HashSet<>();
 	
 	
 
@@ -120,13 +120,15 @@ public class GroupEntity implements Serializable{
 		this.adminDetails = adminDetails;
 	}
 
-	public Set<UserEntity> getMembers() {
-		return members;
+	public Set<UserEntity> getSetUsers() {
+		return setUsers;
 	}
 
-	public void setMembers(Set<UserEntity> members) {
-		this.members = members;
+	public void setSetUsers(Set<UserEntity> setUsers) {
+		this.setUsers = setUsers;
 	}
+
+	
 	
 	
 	
