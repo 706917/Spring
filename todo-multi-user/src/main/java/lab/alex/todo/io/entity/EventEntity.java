@@ -58,11 +58,11 @@ public class EventEntity implements Serializable{
 		//---------------------------
 		
 		@ManyToOne
-		@JoinColumn(name = "creator")
+		@JoinColumn(name = "public_user_id")
 		private UserEntity creatorDetails;
 		
 		@ManyToOne
-		@JoinColumn(name = "publicGroupId")
+		@JoinColumn(name = "public_group_id")
 		private GroupEntity eventGroupDetails;
 		
 		//---------------------------------
