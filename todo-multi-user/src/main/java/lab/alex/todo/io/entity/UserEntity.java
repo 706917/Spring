@@ -17,7 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-@Entity(name = "users")
+@Entity(name = "users_table")
 public class UserEntity implements Serializable {
 
 	private static final long serialVersionUID = -7109290743784846300L;
@@ -172,34 +172,17 @@ public class UserEntity implements Serializable {
 	}
 
 
-	public List<EventEntity> getUsersEvents() {
-		return usersEvents;
-	}
+	
 
 
-	public void setUsersEvents(List<EventEntity> usersEvents) {
-		this.usersEvents = usersEvents;
-	}
-
-
-	public Set<EventEntity> getSetEvents() {
-		return setEvents;
-	}
-
-
-	public void setSetEvents(Set<EventEntity> setEvents) {
-		this.setEvents = setEvents;
-	}
-
-
-	public Set<GroupEntity> getSetGroups() {
-		return setGroups;
-	}
-
-
-	public void setSetGroups(Set<GroupEntity> setGroups) {
-		this.setGroups = setGroups;
-	}
+//	public Set<GroupEntity> getSetGroups() {
+//		return setGroups;
+//	}
+//
+//
+//	public void setSetGroups(Set<GroupEntity> setGroups) {
+//		this.setGroups = setGroups;
+//	}
 	
 	
 }
