@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 
 @Entity
-@Table(name="events")
+@Table(name="events_table")
 public class EventEntity implements Serializable{
 
 	private static final long serialVersionUID = 2697897580625213781L;
