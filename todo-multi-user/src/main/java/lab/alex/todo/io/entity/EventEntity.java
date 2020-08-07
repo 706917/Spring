@@ -114,7 +114,7 @@ public class EventEntity implements Serializable{
 		public void setDateTimeEventCreated(Date dateTimeEventCreated) {
 			this.dateTimeEventCreated = dateTimeEventCreated;
 		}
-
+//
 		public List<TodoEntity> getEventTodos() {
 			return eventTodos;
 		}
