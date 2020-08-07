@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 
-@Entity(name = "todos")
+@Entity(name = "todos_table")
 public class TodoEntity implements Serializable {
 	
 	private static final long serialVersionUID = -7125683743784846300L;
