@@ -17,7 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity(name = "groups")
+@Entity(name = "groups_table")
 public class GroupEntity implements Serializable{
 	
 	private static final long serialVersionUID = 3853540575654884477L;
@@ -34,7 +34,9 @@ public class GroupEntity implements Serializable{
 	private String nameGroup;
 
 	@Column(nullable = false, length = 100)
-	private String description;
+	private String descriptionGroup;
+
+	
 	
 	
 	
@@ -88,12 +90,12 @@ public class GroupEntity implements Serializable{
 		this.nameGroup = nameGroup;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescriptionGroup() {
+		return descriptionGroup;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescriptionGroup(String descriptionGroup) {
+		this.descriptionGroup = descriptionGroup;
 	}
 
 	public List<EventEntity> getGroupEvents() {
