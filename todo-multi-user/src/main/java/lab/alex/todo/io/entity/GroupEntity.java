@@ -33,7 +33,7 @@ public class GroupEntity implements Serializable{
 	@Column(nullable = false, length = 50)
 	private String nameGroup;
 
-	@Column(nullable = false, length = 100)
+	@Column(length = 100)
 	private String descriptionGroup;
 
 	
