@@ -26,7 +26,7 @@ public class UserDto implements Serializable {
 
 	// *****************Association*******************
 
-	private List<TodoEntity> usersTodos;
+	private List<TodoDto> usersTodos;
 	
 	// **************** Accessors **********************
 
@@ -94,11 +94,11 @@ public class UserDto implements Serializable {
 		this.encryptedPassword = encryptedPassword;
 	}
 
-	public List<TodoEntity> getUsersTodos() {
+	public List<TodoDto> getUsersTodos() {
 		return usersTodos;
 	}
 
-	public void setUsersTodos(List<TodoEntity> usersTodos) {
+	public void setUsersTodos(List<TodoDto> usersTodos) {
 		this.usersTodos = usersTodos;
 	}
 
