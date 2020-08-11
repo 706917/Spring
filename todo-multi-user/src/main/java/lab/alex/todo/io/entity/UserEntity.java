@@ -172,17 +172,34 @@ public class UserEntity implements Serializable {
 	}
 
 
-	
+	public List<EventEntity> getUsersEvents() {
+		return usersEvents;
+	}
 
 
-//	public Set<GroupEntity> getSetGroups() {
-//		return setGroups;
-//	}
-//
-//
-//	public void setSetGroups(Set<GroupEntity> setGroups) {
-//		this.setGroups = setGroups;
-//	}
+	public void setUsersEvents(List<EventEntity> usersEvents) {
+		this.usersEvents = usersEvents;
+	}
+
+
+	public Set<EventEntity> getSetEvents() {
+		return setEvents;
+	}
+
+
+	public void setSetEvents(Set<EventEntity> setEvents) {
+		this.setEvents = setEvents;
+	}
+
+
+	public Set<GroupEntity> getSetGroups() {
+		return setGroups;
+	}
+
+
+	public void setSetGroups(Set<GroupEntity> setGroups) {
+		this.setGroups = setGroups;
+	}
 	
 	
 }
