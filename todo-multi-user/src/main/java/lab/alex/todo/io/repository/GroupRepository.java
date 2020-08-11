@@ -8,5 +8,7 @@ import lab.alex.todo.io.entity.GroupEntity;
 
 @Repository
 public interface GroupRepository extends CrudRepository<GroupEntity, Long> {
+	
+	GroupEntity findByPublicGroupId(String id);
 
 }
