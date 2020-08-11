@@ -12,7 +12,7 @@ public class Utils {
 	private final Random RANDOM = new SecureRandom();
 	
 	
-	public String generatePublicUserId() {
+	public String generatePublicId() {
 		int numberOfCharacters = 15;
 		return genarateRandomString(numberOfCharacters);
 	}
