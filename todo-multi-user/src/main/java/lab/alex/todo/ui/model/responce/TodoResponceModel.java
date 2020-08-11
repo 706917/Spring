@@ -14,6 +14,10 @@ public class TodoResponceModel {
 
 		private boolean completed;
 		
+		private String public_user_id;
+		private String public_event_id;
+		private String public_group_id;
+		
 		
 		//*************Accessors*******************
 
@@ -47,6 +51,30 @@ public class TodoResponceModel {
 
 		public void setCompleted(boolean completed) {
 			this.completed = completed;
+		}
+
+		public String getPublic_user_id() {
+			return public_user_id;
+		}
+
+		public void setPublic_user_id(String public_user_id) {
+			this.public_user_id = public_user_id;
+		}
+
+		public String getPublic_event_id() {
+			return public_event_id;
+		}
+
+		public void setPublic_event_id(String public_event_id) {
+			this.public_event_id = public_event_id;
+		}
+
+		public String getPublic_group_id() {
+			return public_group_id;
+		}
+
+		public void setPublic_group_id(String public_group_id) {
+			this.public_group_id = public_group_id;
 		}
 
 }
