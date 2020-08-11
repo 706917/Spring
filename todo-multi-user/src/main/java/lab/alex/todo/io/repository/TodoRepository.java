@@ -8,5 +8,7 @@ import lab.alex.todo.io.entity.TodoEntity;
 
 @Repository
 public interface TodoRepository extends CrudRepository<TodoEntity, Long> {
+	
+	TodoEntity findByPublicTodoId (String id);
 
 }
