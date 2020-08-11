@@ -8,5 +8,7 @@ import lab.alex.todo.io.entity.EventEntity;
 
 @Repository
 public interface EventRepository extends CrudRepository<EventEntity, Long> {
+	
+	EventEntity findByPublicEventId(String id);
 
 }
